@@ -1,0 +1,57 @@
+import plagas.*
+
+describe "test plagas" {
+	const cucarachas = new Cucarachas(poblacion=50,pesoPromedio=9)
+	const pulgas = new Pulgas(poblacion=9)
+	const garrapatas = new Garrapatas(poblacion = 9)
+	const mosquitos = new Mosquitos(poblacion=33)
+	
+	test "Nivel de daño de cucarachas es 25"{
+		assert.equals(25,cucarachas.nivelDeDanio())
+	}
+	test "las cucarachas transmiten enfermedades"{
+		cucarachas.efectoSobreLaPlaga()
+		assert.that(cucarachas.transmitenEnfermedades())
+	}
+	test "Las cucarachas NO transmiten enfermedades"{
+		assert.notThat(cucarachas.transmitenEnfermedades())
+	}
+	
+	
+	test "Nivel de daño de las pulgas es 18"{
+		assert.equals(18,pulgas.nivelDeDanio())
+	}
+	test"Las pulgas NO transmiten enfermedades"{
+		assert.notThat(pulgas.transmitenEnfermedades())
+	}
+	test"Las pulgas transmiten enfermedades"{
+		pulgas.efectoSobreLaPlaga()
+		pulgas.efectoSobreLaPlaga()
+		assert.that(pulgas.transmitenEnfermedades())
+	}
+	
+	
+	test "Nivel de daño de las garrapatas es 18"{
+		assert.equals(18,garrapatas.nivelDeDanio())
+	}
+	test"Las garrapatas NO transmiten enfermedades"{
+		assert.notThat(garrapatas.transmitenEnfermedades())
+	}
+	test"Las garrapatas transmiten enfermedades"{
+		garrapatas.efectoSobreLaPlaga()
+		assert.that(garrapatas.transmitenEnfermedades())
+	}
+	
+	
+	test "Nivel de daño de los mosquitos es 33"{
+		assert.equals(33,mosquitos.nivelDeDanio())
+	}
+	test"Los mosquitos NO transmiten enfermedades"{
+		mosquitos.efectoSobreLaPlaga()
+		assert.notThat(mosquitos.transmitenEnfermedades())
+	}
+	test"Los mosquitos transmiten enfermedades"{
+		garrapatas.efectoSobreLaPlaga()
+		assert.that(mosquitos.transmitenEnfermedades())
+	}
+}

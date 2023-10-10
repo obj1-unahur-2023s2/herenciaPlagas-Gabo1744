@@ -1,0 +1,48 @@
+import elementos.*
+import plagas.*
+import barrios.*
+
+describe "Test Elementos" {
+	const hogar = new Hogar(nivelDeMugre=8,confort=20)
+	const huerta = new Huerta(capacidadProduccion=110)
+	const perro = new Mascota(salud=300)
+	const gato = new Mascota(salud=500)
+	const cucarachas = new Cucarachas(poblacion=50,pesoPromedio=15)
+	const pulgas = new Pulgas(poblacion=25)
+	const garrapatas = new Garrapatas(poblacion = 30)
+	const mosquitos = new Mosquitos(poblacion=60)
+	const laPerlita = new Barrio(elementos = [hogar,huerta,perro,gato])
+	
+	test "El hogar es bueno"{
+		assert.that(hogar.esBueno())
+	}
+	test "El hogar NO es bueno"{
+		hogar.efectoDelAtaque(cucarachas)
+		assert.notThat(hogar.esBueno())
+	}
+	
+	test "La huerta es buena"{
+		assert.that(huerta.esBueno())
+	}
+	test "La huerta NO es buena"{
+		huerta.efectoDelAtaque(pulgas)
+		assert.notThat(huerta.esBueno())
+	}
+	
+	test "El perro es bueno"{
+		assert.that(perro.esBueno())
+	}
+	test "El perro NO es bueno"{
+		perro.efectoDelAtaque(garrapatas)
+		assert.notThat(perro.esBueno())
+	}
+	
+	test "El barrio es copado"{
+		assert.that(laPerlita.esCopado())
+	}
+	test "El barrio NO es copado"{
+		hogar.efectoDelAtaque(mosquitos)
+		perro.efectoDelAtaque(mosquitos)
+		assert.notThat(laPerlita.esCopado())
+	}
+}
